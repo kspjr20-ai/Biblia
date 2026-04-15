@@ -404,45 +404,29 @@ async function init() {
     bible = await resBible.json();
     
     try {
-        const resHarpa = await fetch('harpa.json');
-        if(resHarpa.ok) {
-            const rawHarpa = await resHarpa.json();
-            harpaDB = [];
-            
-            for (let key in rawHarpa) {
-                if (key === "-1") continue; 
-                
-                let item = rawHarpa[key];
-                let titleParts = item.hino.split(" - ");
-                let num = titleParts[0];
-                let title = titleParts.slice(1).join(" - ");
+    const resHarpa = await fetch('harpa.json');
 
-                let lyricsText = "";
-                if (item.verses) {
-                    for (let v in item.verses) {
-                        lyricsText += `${v}. ${item.verses[v].replace(/<br\s*\/?>/gi, '\\n')}\n\n`;
-                        if (v === "1" && item.coro) {
-                            lyricsText += `[Coro]\n${item.coro.replace(/<br\s*\/?>/gi, '\\n')}\n\n`;
-                        }
-                    }
-                } else if (item.coro) {
-                    lyricsText += `[Coro]\n${item.coro.replace(/<br\s*\/?>/gi, '\\n')}\n\n`;
-                } else {
-                    lyricsText = item.hino;
-                }
+    if (resHarpa.ok) {
+        const rawHarpa = await resHarpa.json();
+        harpaDB = [];
 
-                harpaDB.push({
-                    num: parseInt(num),
-                    title: title,
-                    yt: item.yt || "", 
-                    lyrics: lyricsText.trim()
-                });
-            }
-            harpaDB.sort((a, b) => a.num - b.num);
-        }
-    } catch (e) {
-        console.log("Harpa não encontrada ou erro na leitura.");
+        rawHarpa.forEach(item => {
+            harpaDB.push({
+                num: item.num,
+                title: item.title || "Sem título",
+                yt: item.yt || "",
+                lyrics: item.lyrics || ""
+            });
+        });
+
+        harpaDB.sort((a, b) => a.num - b.num);
+    } else {
+        console.error("Erro ao carregar harpa.json:", resHarpa.status);
     }
+
+} catch (e) {
+    console.error("Erro real da harpa:", e);
+}
 
     buildHarpaList();
     build();
