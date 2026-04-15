@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bíblia Sagrada — Edição Interativa & Harpa</title>
+<title>Bíblia Sagrada & Harpa Cristã</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -20,7 +20,6 @@
     --border:      rgba(14, 165, 233, 0.15);
     --radius:      16px;
     --shadow:      0 8px 30px rgba(0, 0, 0, 0.04);
-    
     --font-verse:  18px; 
   }
 
@@ -28,13 +27,8 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg-base);
-    color: var(--text-main);
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    min-height: 100vh;
-    overflow-x: hidden;
+    background: var(--bg-base); color: var(--text-main); font-family: 'Inter', sans-serif;
+    font-size: 16px; line-height: 1.6; min-height: 100vh; overflow-x: hidden;
   }
 
   body::before {
@@ -45,12 +39,10 @@
   }
   
   .glass-panel {
-    background: var(--bg-surface); backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: var(--radius); box-shadow: var(--shadow);
+    background: var(--bg-surface); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.5); border-radius: var(--radius); box-shadow: var(--shadow);
   }
 
-  /* ── Header ── */
   header { text-align: center; padding: 50px 24px 40px; position: relative; }
   header h1 {
     font-family: 'Space Grotesk', sans-serif; font-size: clamp(32px, 5vw, 54px);
@@ -60,29 +52,16 @@
   }
   header p { font-family: 'Inter', sans-serif; color: var(--text-muted); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
 
-  /* ── Search & IA Toggle ── */
   .search-container { max-width: 600px; margin: 30px auto 0; display: flex; flex-direction: column; gap: 12px; }
-  
   .search-wrap { position: relative; width: 100%; }
-  .search-wrap input {
-    width: 100%; background: #ffffff; border: 1px solid var(--border); border-radius: 40px;
-    color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 16px; padding: 18px 50px 18px 26px;
-    outline: none; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-  }
+  .search-wrap input { width: 100%; background: #ffffff; border: 1px solid var(--border); border-radius: 40px; color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 16px; padding: 18px 50px 18px 26px; outline: none; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
   .search-wrap input:focus { border-color: var(--accent-blue); box-shadow: 0 4px 20px rgba(14, 165, 233, 0.15); }
   .search-icon { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); color: var(--accent-blue); font-size: 20px; pointer-events: none; }
 
-  .ai-toggle {
-    display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;
-    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: var(--text-muted);
-    transition: all 0.3s; width: fit-content; margin: 0 auto;
-    background: #fff; padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border);
-  }
+  .ai-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: var(--text-muted); transition: all 0.3s; width: fit-content; margin: 0 auto; background: #fff; padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); }
   .ai-toggle.active { background: var(--accent-ai); color: #fff; border-color: var(--accent-ai); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); }
 
-  /* ── Layout ── */
   .container { display: grid; grid-template-columns: 280px 1fr; gap: 30px; max-width: 1400px; margin: 0 auto; padding: 0 30px 40px; }
-
   aside { padding: 20px; height: calc(100vh - 120px); position: sticky; top: 20px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--accent-blue) transparent; }
   aside::-webkit-scrollbar { width: 4px; }
   aside::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 2px; }
@@ -101,17 +80,22 @@
   .abbrev { font-family: 'Space Grotesk', sans-serif; font-size: 10px; color: var(--text-muted); background: #e2e8f0; padding: 3px 6px; border-radius: 4px; font-weight: 600; }
   .book-btn.active .abbrev { color: #fff; background: var(--accent-blue); }
   .harpa-badge { background: var(--accent-gold); color: #fff; }
-  .book-btn.active .harpa-badge { background: var(--accent-blue); }
+  .book-btn.active .harpa-badge { background: var(--accent-gold); color: #fff; box-shadow: 0 2px 8px rgba(251, 191, 36, 0.4); }
 
-  .book-btn.hidden { display: none; }
-
-  /* Barrinhas de Progresso no Menu Lateral */
   .book-progress-bar { width: 100%; height: 3px; background: rgba(0,0,0,0.06); border-radius: 2px; overflow: hidden; margin-top: 4px; }
   .book-progress-fill { height: 100%; background: var(--accent-green); width: 0%; transition: width 0.3s ease; }
 
-  /* ── Main ── */
-  main { padding: 50px; }
+  .harpa-section-header { display: flex; justify-content: space-between; cursor: pointer; padding: 12px; border-radius: 8px; background: rgba(251, 191, 36, 0.1); margin-bottom: 8px; transition: 0.2s; }
+  .harpa-section-header:hover { background: rgba(251, 191, 36, 0.2); }
+  
+  #harpa-search-input { width: 100%; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-family: 'Inter'; font-size: 13px; color: var(--text-main); margin-bottom: 10px; outline: none; transition: 0.2s; }
+  #harpa-search-input:focus { border-color: var(--accent-gold); box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2); }
+  
+  .harpa-scroll-area { max-height: 45vh; overflow-y: auto; padding-right: 4px; scrollbar-width: thin; scrollbar-color: var(--accent-gold) transparent; }
+  .harpa-scroll-area::-webkit-scrollbar { width: 4px; }
+  .harpa-scroll-area::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 2px; }
 
+  main { padding: 50px; }
   #welcome { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50vh; text-align: center; }
   #welcome h2 { font-family: 'Space Grotesk', sans-serif; font-size: 28px; margin-bottom: 12px; }
   #welcome p { color: var(--text-muted); font-size: 18px; margin-bottom: 30px; }
@@ -123,8 +107,7 @@
   .btn-continue { background: var(--bg-surface2); border: 1px solid var(--accent-blue); color: var(--accent-blue); padding: 16px 32px; border-radius: 30px; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: none; }
   .btn-continue:hover { background: var(--accent-soft); transform: translateY(-3px); }
 
-  #book-view { display: none; }
-  #harpa-view { display: none; }
+  #book-view, #harpa-view, #search-results { display: none; }
   
   .book-header { margin-bottom: 40px; }
   .book-header h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(32px, 5vw, 48px); line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.5px; }
@@ -134,8 +117,6 @@
   .ch-btn { background: #ffffff; border: 1px solid var(--border); color: var(--text-muted); border-radius: 10px; width: 44px; height: 44px; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
   .ch-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); transform: translateY(-2px); }
   .ch-btn.active { background: var(--accent-blue); color: #ffffff; border-color: var(--accent-blue); box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3); }
-  
-  /* Indicador de Capítulo Lido */
   .ch-btn.read { border-color: var(--accent-green); color: var(--accent-green); background: rgba(16, 185, 129, 0.05); }
   .ch-btn.read.active { background: var(--accent-green); color: #fff; border-color: var(--accent-green); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
 
@@ -143,18 +124,15 @@
   @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
   
   .chapter-title { font-family: 'Space Grotesk', sans-serif; font-size: 18px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
-  
   .verse { display: flex; gap: 20px; margin-bottom: 12px; padding: 18px 24px; border-radius: 12px; background: transparent; border: 1px solid transparent; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
   .verse:hover { background: #ffffff; border-color: var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.03); transform: translateX(5px); }
   .vnum { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: calc(var(--font-verse) * 0.7); color: var(--accent-blue); padding-top: 4px; min-width: 24px; }
   .vtext { font-size: var(--font-verse); color: var(--text-main); line-height: 1.7; font-weight: 300; transition: font-size 0.3s; }
 
-  /* ── Estilos exclusivos da aba Harpa ── */
   .yt-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); background: #000; }
   .yt-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
   .lyrics-box { font-family: 'Inter', sans-serif; font-size: var(--font-verse); line-height: 1.9; color: var(--text-main); font-weight: 300; white-space: pre-wrap; padding: 30px; background: rgba(255,255,255,0.6); border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); transition: font-size 0.3s; }
 
-  /* ── Modal Inovador ── */
   .modal-overlay { position: fixed; inset: 0; background: rgba(244, 247, 251, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
   .modal-overlay.active { opacity: 1; pointer-events: all; }
   .modal-content { background: #ffffff; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08); border-radius: 24px; padding: 50px; max-width: 750px; width: 90%; position: relative; transform: scale(0.95) translateY(20px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -171,8 +149,6 @@
   .btn-action.wpp:hover { background: var(--accent-green); color: #fff; }
   .btn-action.fav.saved { background: var(--accent-gold); color: #fff; }
 
-  /* ── Search results ── */
-  #search-results { display: none; }
   .result-item { border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; background: #ffffff; transition: all 0.2s; cursor: pointer; }
   .result-item:hover { border-color: var(--accent-blue); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.04); }
   .result-ref { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: var(--accent-blue); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
@@ -180,7 +156,6 @@
   .result-text mark { background: var(--accent-soft); color: var(--accent-blue); border-radius: 4px; padding: 2px 6px; font-weight: 500; }
   .result-text mark.ai-mark { background: rgba(139, 92, 246, 0.15); color: var(--accent-ai); }
 
-  /* ── Nav & Modo Estudo ── */
   .ch-nav { display: flex; gap: 12px; margin-top: 50px; flex-wrap: wrap; }
   .ch-nav button { flex: 1; background: #ffffff; border: 1px solid var(--border); color: var(--text-main); font-family: 'Space Grotesk', sans-serif; font-weight: 600; padding: 18px; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; min-width: 140px; }
   .ch-nav button:hover:not(:disabled) { border-color: var(--accent-blue); color: var(--accent-blue); background: var(--accent-soft); }
@@ -198,9 +173,36 @@
   .spinner { width: 50px; height: 50px; border: 3px solid rgba(14, 165, 233, 0.2); border-top-color: var(--accent-blue); border-radius: 50%; animation: spin 1s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
+  /* ── BOTÃO E OVERLAY MOBILE (NOVOS) ── */
+  .mobile-menu-btn {
+    display: none; position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+    border-radius: 50%; background: var(--accent-blue); color: white; border: none;
+    box-shadow: 0 10px 25px rgba(14, 165, 233, 0.4); font-size: 24px; z-index: 2001;
+    align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;
+  }
+  .mobile-menu-btn:active { transform: scale(0.9); }
+  
+  .mobile-overlay {
+    position: fixed; inset: 0; background: rgba(3,7,18,0.6); backdrop-filter: blur(4px);
+    z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  }
+  .mobile-overlay.active { opacity: 1; pointer-events: all; }
+
+  /* ── RESPONSIVO ── */
   @media (max-width: 768px) {
     .container { grid-template-columns: 1fr; padding: 16px; }
-    aside { display: none; }
+    
+    /* Menu Lateral deslizando no Mobile */
+    aside {
+      position: fixed; top: 0; left: -320px; width: 85%; max-width: 320px; height: 100vh;
+      z-index: 2000; background: var(--bg-surface2); box-shadow: 20px 0 40px rgba(0,0,0,0.15);
+      transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 0 24px 24px 0;
+      padding-top: 40px;
+    }
+    aside.open { left: 0; }
+    
+    .mobile-menu-btn { display: flex; }
+    
     main { padding: 30px 20px; }
     .modal-content { padding: 30px; }
     .modal-text { font-size: 22px; }
@@ -218,6 +220,9 @@
 
 <div id="toast">Notificação</div>
 
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+
 <div id="app" style="display:none">
   <header>
     <h1>Bíblia Sagrada</h1>
@@ -227,9 +232,7 @@
         <input type="search" id="search-input" placeholder="Pesquisar versículos ou temas..." autocomplete="off">
         <span class="search-icon">⌕</span>
       </div>
-      <div class="ai-toggle" id="btn-ai-toggle">
-        🧠 Modo IA: Desativado
-      </div>
+      <div class="ai-toggle" id="btn-ai-toggle">🧠 Modo IA: Desativado</div>
     </div>
   </header>
 
@@ -248,8 +251,15 @@
         <div id="fav-list"></div>
       </div>
       
-      <div class="testament-label" style="color: var(--accent-gold);">🎵 Harpa Cristã</div>
-      <div id="harpa-list"></div>
+      <div class="harpa-section-header" onclick="toggleHarpaMenu()">
+          <span class="testament-label" style="padding:0; color: var(--accent-gold); margin:0;">🎵 Harpa Cristã (640)</span>
+          <span id="harpa-arrow" style="color: var(--accent-gold); font-size: 12px;">▼</span>
+      </div>
+      
+      <div id="harpa-wrap" style="display:none; margin-bottom: 20px;">
+          <input type="text" id="harpa-search-input" placeholder="Filtrar hino (Ex: 15 ou Cruz)..." autocomplete="off">
+          <div id="harpa-list" class="harpa-scroll-area"></div>
+      </div>
 
       <div class="testament-label" style="margin-top: 15px;">Antigo Testamento</div>
       <div id="ot-list"></div>
@@ -301,7 +311,6 @@
     <button class="close-modal" id="close-modal">&times;</button>
     <div class="modal-ref" id="modal-ref"></div>
     <div class="modal-text" id="modal-text"></div>
-    
     <div class="modal-actions">
       <button class="btn-action" id="btn-audio">🔊 Ouvir Versículo</button>
       <button class="btn-action wpp" id="btn-wpp">📱 WhatsApp</button>
@@ -314,6 +323,7 @@
 <script>
 const OT_COUNT = 39;
 let bible = [];
+let harpaDB = []; 
 let currentBook = null;
 let currentChapter = 0;
 let searchTimer = null;
@@ -323,28 +333,6 @@ let studyProgress = JSON.parse(localStorage.getItem('bibleProgress')) || {};
 let lastRead = JSON.parse(localStorage.getItem('lastReadBible')) || null; 
 let fontSize = 18;
 let aiModeEnabled = false;
-
-// ── BANCO DE DADOS LOCAL DA HARPA CRISTÃ ──
-const harpaDB = [
-  {
-    num: 15,
-    title: "Foi na Cruz",
-    yt: "lKORNX0ZdRE",
-    lyrics: "Oh! quão cego andei e perdido vaguei,\nLonge, longe do meu Salvador!\nMas do céu Ele desceu, e Seu sangue verteu\nPra salvar um tão pobre pecador.\n\nFoi na cruz, foi na cruz\nOnde um dia eu vi\nMeu pecado castigado em Jesus;\nFoi ali, pela fé, que os olhos abri,\nE agora me alegro em Sua luz.\n\nEu ouvia falar dessa graça sem par,\nQue do céu trouxe o nosso Jesus;\nMas eu surdo me fiz, converter-me não quis\nAo Senhor, que por mim morreu na cruz.\n\nMas um dia senti meu pecado, e vi\nSobre mim a espada da lei;\nApressado fugi, em Jesus me escondi,\nE abrigo seguro n'Ele achei.\n\nQuão ditoso, então, este meu coração,\nConhecendo o excelso amor\nQue levou meu Jesus a sofrer lá na cruz,\nPra salvar um tão pobre pecador."
-  },
-  {
-    num: 39,
-    title: "Alvo Mais Que a Neve",
-    yt: "8OOZPWtc1Jo",
-    lyrics: "Bendito seja o Cordeiro\nQue na cruz por nós padeceu!\nBendito seja o Seu sangue\nQue por nós, ali Ele verteu!\nEis nesse sangue lavados,\nCom roupas que tão alvas são,\nOs pecadores remidos,\nQue perante o Seu Deus já estão!\n\nAlvo mais que a neve!\nAlvo mais que a neve!\nSim, nesse sangue lavado,\nMais alvo que a neve serei.\n\nQuão espinhosa a coroa\nQue Jesus por nós suportou!\nOh! Quão profundas as chagas,\nQue nos provam o quanto Ele amou!\nEis nessas chagas pureza\nPara o maior pecador!\nPois que mais alvo que a neve,\nO Teu sangue nos torna, Senhor!\n\nSe nós a Ti confessarmos,\nE seguirmos na Tua luz,\nTu não somente perdoas,\nPurificas também, ó Jesus;\nSim, e de todo o pecado!\nQue maravilha de amor!\nPois que mais alvo que a neve,\nO Teu sangue nos torna, Senhor."
-  },
-  {
-    num: 526,
-    title: "Grandioso És Tu",
-    yt: "VLB30ZsD7-I",
-    lyrics: "Senhor meu Deus, quando eu, maravilhado,\nContemplo a Tua imensa criação,\nA terra e o mar e o céu todo estrelado\nMe vêm falar da Tua perfeição.\n\nEntão minhalma canta a Ti, Senhor:\nGrandioso és Tu! Grandioso és Tu!\nEntão minhalma canta a Ti, Senhor:\nGrandioso és Tu! Grandioso és Tu!\n\nQuando as estrelas, tão de mim distantes,\nVejo a brilhar com vívido esplendor,\nRelembro, oh, Deus, as glórias cintilantes\nQue meu Jesus deixou, por meu amor!\n\nOlho as florestas murmurando ao vento\nE, ao ver que Tu plantaste cada pé,\nRecordo a cruz, o lenho tão cruento,\nE no Teu Filho afirmo a minha fé.\n\nE quando penso que Tu não poupaste\nTeu Filho amado por amor de mim,\nMeu coração, que nEle Tu ganhaste,\nTransborda, ó Pai, de amor que não tem fim!\n\nE quando Cristo, o amado meu, voltando,\nVier dos céus o povo Seu buscar,\nNo lar eterno quero, jubilando,\nA Tua santa face contemplar."
-  }
-];
 
 const aiThemes = {
   "adulterio": ["adulter", "mulher do proximo", "mulher de teu proximo", "leito sem macula", "infidelidade"],
@@ -373,25 +361,112 @@ document.getElementById('btn-ai-toggle').addEventListener('click', function() {
   if(q) doSearch(q);
 });
 
+// ── Lógica do Menu Mobile ──
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileOverlay = document.getElementById('mobile-overlay');
+const sidebar = document.getElementById('sidebar');
+
+mobileMenuBtn.addEventListener('click', () => {
+    sidebar.classList.add('open');
+    mobileOverlay.classList.add('active');
+});
+
+mobileOverlay.addEventListener('click', () => {
+    closeMobileMenu();
+});
+
+function closeMobileMenu() {
+    if (window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+        mobileOverlay.classList.remove('active');
+    }
+}
+
+function toggleHarpaMenu() {
+    const wrap = document.getElementById('harpa-wrap');
+    const arrow = document.getElementById('harpa-arrow');
+    if (wrap.style.display === 'none') {
+        wrap.style.display = 'block';
+        arrow.textContent = '▲';
+    } else {
+        wrap.style.display = 'none';
+        arrow.textContent = '▼';
+    }
+}
+
+document.getElementById('harpa-search-input').addEventListener('input', function() {
+    buildHarpaList(this.value);
+});
+
 async function init() {
   try {
-    const res = await fetch('acf.json');
-    bible = await res.json();
-    buildHarpaList(); // Constrói o menu da Harpa
-    build();          // Constrói o menu da Bíblia
+    const resBible = await fetch('acf.json');
+    bible = await resBible.json();
+    
+    try {
+        const resHarpa = await fetch('harpa.json');
+        if(resHarpa.ok) {
+            const rawHarpa = await resHarpa.json();
+            harpaDB = [];
+            
+            for (let key in rawHarpa) {
+                if (key === "-1") continue; 
+                
+                let item = rawHarpa[key];
+                let titleParts = item.hino.split(" - ");
+                let num = titleParts[0];
+                let title = titleParts.slice(1).join(" - ");
+
+                let lyricsText = "";
+                if (item.verses) {
+                    for (let v in item.verses) {
+                        lyricsText += `${v}. ${item.verses[v].replace(/<br\s*\/?>/gi, '\\n')}\n\n`;
+                        if (v === "1" && item.coro) {
+                            lyricsText += `[Coro]\n${item.coro.replace(/<br\s*\/?>/gi, '\\n')}\n\n`;
+                        }
+                    }
+                } else if (item.coro) {
+                    lyricsText += `[Coro]\n${item.coro.replace(/<br\s*\/?>/gi, '\\n')}\n\n`;
+                } else {
+                    lyricsText = item.hino;
+                }
+
+                harpaDB.push({
+                    num: parseInt(num),
+                    title: title,
+                    yt: item.yt || "", 
+                    lyrics: lyricsText.trim()
+                });
+            }
+            harpaDB.sort((a, b) => a.num - b.num);
+        }
+    } catch (e) {
+        console.log("Harpa não encontrada ou erro na leitura.");
+    }
+
+    buildHarpaList();
+    build();
     renderFavorites();
     updateWelcomeScreen();
     document.getElementById('loading').style.display = 'none';
     document.getElementById('app').style.display = 'block';
   } catch(e) {
-    document.getElementById('loading').innerHTML = '<p style="color:#ef4444;">Erro ao carregar acf.json.</p>';
+    document.getElementById('loading').innerHTML = '<p style="color:#ef4444;">Erro Crítico ao carregar arquivos.</p>';
   }
 }
 
-// Constrói o menu da Harpa Cristã
-function buildHarpaList() {
+function buildHarpaList(filterText = '') {
   const harpaList = document.getElementById('harpa-list');
+  harpaList.innerHTML = '';
+  
+  const lowerFilter = removeAcentos(filterText);
+
   harpaDB.forEach((hino, idx) => {
+    if (filterText) {
+       const searchString = removeAcentos(`${hino.num} ${hino.title}`);
+       if (!searchString.includes(lowerFilter)) return;
+    }
+
     const btn = document.createElement('button');
     btn.className = 'book-btn harpa-menu-btn';
     btn.innerHTML = `
@@ -405,19 +480,41 @@ function buildHarpaList() {
   });
 }
 
-// Abre a aba da Harpa e o Player
 function openHymn(idx, btnElement) {
-  // Limpa estado do menu da Bíblia
+  closeMobileMenu(); // Fecha o menu no celular ao escolher
+  
   document.querySelectorAll('.book-btn').forEach(b => b.classList.remove('active'));
   if (btnElement) btnElement.classList.add('active');
 
   const hino = harpaDB[idx];
-  
-  // Preenche dados do hino
   document.getElementById('harpa-title').textContent = `${hino.num} - ${hino.title}`;
-  document.getElementById('harpa-yt-container').innerHTML = `
-    <iframe src="https://www.youtube.com/embed/${hino.yt}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  `;
+  
+  const ytContainer = document.getElementById('harpa-yt-container');
+  
+  if(hino.yt) {
+      ytContainer.style.display = 'block';
+      ytContainer.style.paddingBottom = '56.25%'; 
+      ytContainer.style.background = '#000';
+      ytContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${hino.yt}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  } else {
+      ytContainer.style.display = 'flex';
+      ytContainer.style.alignItems = 'center';
+      ytContainer.style.justifyContent = 'center';
+      ytContainer.style.paddingBottom = '0';
+      ytContainer.style.height = '150px';
+      ytContainer.style.background = 'var(--bg-surface2)';
+      
+      const searchQuery = encodeURIComponent(`Harpa Cristã ${hino.num} ${hino.title} cantado`);
+      ytContainer.innerHTML = `
+        <div style="text-align:center; padding: 20px;">
+          <p style="color:var(--text-muted); margin-bottom:15px; font-family:'Inter'; font-size:14px;">Áudio não embutido neste hino.</p>
+          <a href="https://www.youtube.com/results?search_query=${searchQuery}" target="_blank" style="background:#ef4444; color:#fff; padding:12px 24px; border-radius:30px; text-decoration:none; font-family:'Space Grotesk'; font-weight:600; display:inline-block; transition:0.2s; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);">
+            ▶️ Ouvir no YouTube
+          </a>
+        </div>
+      `;
+  }
+  
   document.getElementById('harpa-lyrics').textContent = hino.lyrics;
   
   showPanel('harpa');
@@ -485,7 +582,8 @@ function openBook(idx) {
   currentBook = idx;
   currentChapter = 0;
   
-  // Interrompe o vídeo da Harpa caso esteja tocando ao mudar para a Bíblia
+  closeMobileMenu(); // Fecha o menu no celular ao escolher um livro
+  
   document.getElementById('harpa-yt-container').innerHTML = '';
 
   document.querySelectorAll('.book-btn').forEach(b => b.classList.remove('active'));
@@ -630,7 +728,6 @@ document.getElementById('btn-wpp').addEventListener('click', function() {
   window.open(`https://api.whatsapp.com/send?text=${textEncoded}`, '_blank');
 });
 
-// ── TTS com Voz Natural ──
 let availableVoices = [];
 window.speechSynthesis.onvoiceschanged = () => { availableVoices = window.speechSynthesis.getVoices(); };
 
@@ -768,14 +865,12 @@ function openBookChapter(bi, ci, vi) {
   setTimeout(() => openVerseModal(bi, ci, vi), 400); 
 }
 
-// ── Gestão Inteligente dos Paineis ──
 function showPanel(panel) {
   document.getElementById('welcome').style.display = panel === 'welcome' ? 'flex' : 'none';
   document.getElementById('book-view').style.display = panel === 'book' ? 'block' : 'none';
   document.getElementById('harpa-view').style.display = panel === 'harpa' ? 'block' : 'none';
   document.getElementById('search-results').style.display = panel === 'search' ? 'block' : 'none';
   
-  // Limpa o YouTube embed para a música não continuar tocando ao fechar a aba
   if(panel !== 'harpa') {
     document.getElementById('harpa-yt-container').innerHTML = '';
   }
