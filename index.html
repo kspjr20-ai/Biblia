@@ -244,6 +244,10 @@
 
   <div class="container">
     <aside class="glass-panel" id="sidebar">
+      <button class="book-btn" onclick="goHome()" style="margin-bottom: 20px; flex-direction: row; align-items: center; justify-content: center; gap: 8px; background: var(--accent-soft); color: var(--accent-blue); font-weight: 600; font-size: 15px;">
+        🏠 Início
+      </button>
+
       <div class="tools-header">
         <span class="testament-label" style="padding:0">Zoom do Texto</span>
         <div class="zoom-btns">
@@ -386,6 +390,12 @@ function closeMobileMenu() {
         sidebar.classList.remove('open');
         mobileOverlay.classList.remove('active');
     }
+}
+
+function goHome() {
+    closeMobileMenu();
+    document.querySelectorAll('.book-btn').forEach(b => b.classList.remove('active'));
+    showPanel('welcome');
 }
 
 function toggleHarpaMenu() {
@@ -568,7 +578,7 @@ function continueReading() {
     }
 }
 
-function openBook(idx) {
+function openBook(idx, preventSave = false) {
   currentBook = idx;
   currentChapter = 0;
   
@@ -585,7 +595,7 @@ function openBook(idx) {
 
   renderChapterTabs(idx);
   showPanel('book');
-  loadChapter(0);
+  loadChapter(0, preventSave);
 }
 
 function renderChapterTabs(bIdx) {
@@ -605,14 +615,16 @@ function renderChapterTabs(bIdx) {
   });
 }
 
-function loadChapter(ci) {
+function loadChapter(ci, preventSave = false) {
   currentChapter = ci;
   const book = bible[currentBook];
   const verses = book.chapters[ci];
 
-  lastRead = { bIdx: currentBook, cIdx: ci };
-  localStorage.setItem('lastReadBible', JSON.stringify(lastRead));
-  updateWelcomeScreen();
+  if (!preventSave) {
+    lastRead = { bIdx: currentBook, cIdx: ci };
+    localStorage.setItem('lastReadBible', JSON.stringify(lastRead));
+    updateWelcomeScreen();
+  }
 
   document.querySelectorAll('.ch-btn').forEach((b, i) => {
       b.classList.remove('active');
@@ -666,7 +678,7 @@ function openRandomVerse() {
   const cIdx = Math.floor(Math.random() * book.chapters.length);
   const chapter = book.chapters[cIdx];
   const vIdx = Math.floor(Math.random() * chapter.length);
-  openBookChapter(bIdx, cIdx, vIdx);
+  openBookChapter(bIdx, cIdx, vIdx, true);
 }
 
 function changeFontSize(step) {
@@ -848,10 +860,10 @@ function doSearch(q) {
   `).join('');
 }
 
-function openBookChapter(bi, ci, vi) {
+function openBookChapter(bi, ci, vi, preventSave = false) {
   document.getElementById('search-input').value = '';
-  openBook(bi);
-  loadChapter(ci);
+  openBook(bi, preventSave);
+  loadChapter(ci, preventSave);
   setTimeout(() => openVerseModal(bi, ci, vi), 400); 
 }
 
